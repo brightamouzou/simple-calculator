@@ -1,0 +1,30 @@
+.power{
+    // position: absolute;
+    // left: 5%;
+    // top: 5%;
+    height: min-content;
+    flex: 1;
+
+    button{
+        width: 100%;
+        border: none;
+        margin: 5px auto;
+        background-color: black;
+        border-radius: 10px;
+
+        &.isPowerOn{
+            background-color: green;
+        }
+        &.isPowerOff{
+            background-color: rgb(145, 0, 0);
+        }
+
+        img{
+            width: 50px;
+            height: 50px;
+            color: white;
+        }
+      
+    }
+ 
+}

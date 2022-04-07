@@ -1,0 +1,60 @@
+.screen{
+    width: 100%;
+    border-radius: 2%;
+    font-family: "Calculator";
+    margin: auto;
+    height: 150px;
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all .2s;
+    // word-wrap: break-word;
+
+    &.isPowerOn{
+    background: rgb(123, 134, 98);
+    }
+
+    &.isPowerOff{
+        background: rgb(94, 100, 82);
+    }
+
+    .old_calculs{
+        flex: .7 1;
+        max-height: 100px;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar-button, &::-webkit-scrollbar-corner{
+            display: none;
+        }
+    }
+    .current_calcul{
+        overflow-x:auto;
+        overflow-y:hidden;
+        min-height: 50px;
+        border-top: 1px solid black;
+
+        .calculExpressionInput{
+            width: 98%;
+            // height: 40px;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            background: transparent;
+        }
+
+        .result{
+            margin-bottom: 0;
+            height: 25px;
+            text-align: right;
+            margin-right: 10px;
+            font-size: 26px;
+        }
+
+        input[type="submit"]{
+            display: none;
+        }
+    }
+    
+}

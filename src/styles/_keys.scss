@@ -1,0 +1,52 @@
+.keys{
+    width: min-content;
+    margin: auto;
+    background: #cac6c6;    
+
+    .line{
+        display: flex;
+        background: #cac6c6;    
+
+        span{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            font-family: Arial, Helvetica, sans-serif;
+            width: 50px;
+            height: 50px;
+            color: black;
+            background: rgb(228, 219, 219);
+            opacity: .8;
+            border-radius: 10%;
+            transition:  all ease-in-out;
+            text-align: center;
+            font-size: 110%;
+            text-shadow:1px 1px 2px gray;
+            &:hover{
+                background-color: rgba(0,0,0,0.8);
+                cursor: pointer;
+                color: white;
+            }
+    
+            &::before{
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: transparent;  
+                z-index: -1; 
+                border-radius: 10%;         
+            }
+    
+            &:active::before{
+                background-color: gray;
+            }
+            
+        }
+        &__command{
+            margin: 8px;
+        }
+    }
+}
