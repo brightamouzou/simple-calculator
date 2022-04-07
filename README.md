@@ -1,7 +1,9 @@
 # Simple claculator app (BAB Calc)
 This is a a simple calculator with all basic features...
 
-![BAB calc](https://github.com/brightamouzou/simple-calculator/tree/main/public/my_calc.png?raw=true)
+![BAB calc](https://raw.githubusercontent.com/brightamouzou/simple-calculator/main/public/my_calc.png)
+
+<img src="https://github.com/brightamouzou/simple-calculator/tree/main/public/my_calc.png?raw=true">
 
 ### Features
     * Turn on your calculator
