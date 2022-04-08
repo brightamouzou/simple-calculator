@@ -18,7 +18,7 @@ This is a a simple calculator with all basic features...
     4. npm start 
 
 ### Deployment
-    []
+    [https://simple-calculator-mauve-ten.vercel.app](https://simple-calculator-mauve-ten.vercel.app/)
 
 ### Others
     Any suggestion or pull request will be welcome
