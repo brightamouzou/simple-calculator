@@ -1,5 +1,6 @@
 .screen{
     width: 100%;
+    max-width: 290px;
     border-radius: 2%;
     font-family: "Calculator";
     margin: auto;
@@ -8,9 +9,9 @@
     font-weight: bold;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    // overflow: hidden;
     transition: all .2s;
-    // word-wrap: break-word;
+    // word-wrap:;
 
     &.isPowerOn{
     background: rgb(123, 134, 98);
@@ -23,7 +24,9 @@
     .old_calculs{
         flex: .7 1;
         max-height: 100px;
+        max-width: 100%;
         overflow-y: auto;
+        overflow-x: auto;
 
         &::-webkit-scrollbar-button, &::-webkit-scrollbar-corner{
             display: none;

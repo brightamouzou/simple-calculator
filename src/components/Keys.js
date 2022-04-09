@@ -1,50 +1,80 @@
 import React, { useEffect, useRef } from 'react'
 import Power from './Power';
-import { lines, reversedString } from './utils'
+import { lines, reversedString, reg, reg2, formattedString} from './utils'
+
 
 
 function Keys({keysProps:
-  {isPowerOn,setIsPowerOn,setCalculExpression,calculExpression, setPrintResult, lastInput,setLastInput, setCursorPosition,cursorPosition, setResultsStack,resultsStack}}
+  {submit, clickedEqual,isPowerOn,setIsPowerOn,setCalculExpression,calculExpression, setPrintResult, lastInput,setLastInput, setCursorPosition,cursorPosition,setResult, setResultsStack,resultsStack}}
 ){
 
   const calculExpressionInput=useRef();
   calculExpressionInput.current=document.querySelector(".calculExpressionInput");
+ 
 
+  // useEffect(()=>{
+  //   const equal=document.querySelector("span[aria-type='EQUAL']");
+  //   console.log(calculExpression.at(-1));
+  //   equal.addEventListener("click", ()=>{
+  //       try {
+  //         setPrintResult(true)
+  //         document.forms[0].submit()
+
+  //       } catch (e) {
+  //         setPrintResult(false)
+  //         setResult("Invalid expression")
+  //         return;
+  //       }
+
+  //   })
+
+  // }, [])
   async function addKeyToString(ele){
     calculExpressionInput.current.focus()
+    setPrintResult(false)
+
     if(!isPowerOn){
+      setPrintResult(false)
       return
     }
-    const str=ele.name;
+    let str=ele.name;
     switch(ele.role){
+
       case "EQUAL":
-        return  
+        setPrintResult(true)
+        submit.click()
+        // clickedEqual()
+        return
       case "ANS":
         if(resultsStack.length)
           setCalculExpression(resultsStack.at(-1)[1])
         return
       case "C":
-          const firstCharacter=reversedString(calculExpression)[0] 
-          if (firstCharacter=="÷"){
+          const firstCharacter=reversedString(calculExpression).at(0) 
+          if (firstCharacter==="/"){
             setCalculExpression(c => reversedString(reversedString(c).replace("/", "")));
-          }else if(firstCharacter=="×"){
+          }else if(firstCharacter==="*"){
             setCalculExpression(c => reversedString(reversedString(c).replace("*", "")));
           }else{
-            setCalculExpression(c =>c.replace(c.at(-1), ""));
+            setCalculExpression(c =>reversedString(reversedString(c).slice(1,)));
           }
 
           return
       case "OPERATOR":
+
         if(ele.name==="×"){
-          setCalculExpression(c=>c+"*")
-          return
+          // setCalculExpression(c=>c+"*")
+          str="*"
+          // return
         }
-        else if(ele.name=="÷"){
-          setCalculExpression(c=>c+"/")
-          return
+        else if(ele.name==="÷"){
+          str="/"
+          // setCalculExpression(c=>c+"/")
+          // return
         }
-        setCalculExpression((c)=>c+str)
-        
+
+        setCalculExpression(formattedString(calculExpression, str))
+      
         return
       case "CHANGE_SIGN":
         try {
@@ -68,15 +98,23 @@ function Keys({keysProps:
         break
       default:break
     }
+
+
     setCalculExpression(c=>c+str)
     setPrintResult(false)
+
+    // const tmp=parseFloat(calculExpression)
+    // if(tmp){
+    //   console.log(tmp);
+    //   setCalculExpression(c=>tmp+str)
+    // }
+    // else
+    //   setCalculExpression(c=>c+str)
+    // setPrintResult(false)
     
   }
 
-  useEffect(()=>{
-    if (cursorPosition>0)
-      setCalculExpression()
-  }, [cursorPosition])
+
   
   return (
     <div className='keys'>

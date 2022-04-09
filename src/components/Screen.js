@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { formattedString } from './utils';
 
 
-function Screen({ screenProps: {isPowerOn,setCalculExpression, calculExpression, result, setResult,printResult, setPrintResult ,lastInput, setLastInput,setCursorPosition,cursorPosition, resultsStack,setResultsStack} }) {
+function Screen({ screenProps: {isPowerOn,setCalculExpression, calculExpression, result, setResult,printResult, setPrintResult ,lastInput, setLastInput,setCursorPosition,cursorPosition, resultsStack,setResultsStack, clickedEqual} }) {
 
   function handleCaluculExpression(e) {
     e.preventDefault();
+    clickedEqual()
     setPrintResult(true);
-
+    setResult(eval(calculExpression))
     if (result!="Invalid expression")
       setResultsStack(c=>[...c, [calculExpression,result]])
   }
@@ -16,7 +18,13 @@ function Screen({ screenProps: {isPowerOn,setCalculExpression, calculExpression,
       setCalculExpression("")
       return
     }
-    setCalculExpression(e.target.value);
+    const {value}=e.target
+
+    if (["+", "-", "*", "/"].includes(value.at(-1)))
+      //We formate the value to change things as (0005 by 5).That is th goal of formattedString function
+      setCalculExpression(formattedString(value.slice(0, value.length-1), value.at(-1)))
+    else
+      setCalculExpression(e.target.value);
     setPrintResult(false);
   
   }

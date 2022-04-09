@@ -1,6 +1,10 @@
 const NUMBER="NUMBER";
 const OPERATOR="OPERATOR";
 
+export const reg=/[+\-/*](.*?)([+\-/*])/i
+export const reg2=/\b(.*?)[+\-/*]/
+export const reg3=/.*[+\-/*](.*)/
+
 class Button{
     constructor(name, role, valueToDisplay="",color=""){
         //If the name is empty string, then that command will outpout nothing when we tap on
@@ -50,7 +54,6 @@ const line6=[
     new Button(".", "COMMAN"),
     new Button("", "EQUAL", "="),
     new Button("-", OPERATOR),
-
 ]
 
 export const lines =[line1, line2, line3, line4, line5, line6]
@@ -70,4 +73,41 @@ export function formateCalc(str){
 
 export function reversedString(str){
     return str.split("").reverse().join("")
+}
+
+export function formattedString(calculExpression, str){
+    let str2=reversedString(calculExpression+str);
+    let definitiveStr=calculExpression+str;
+    let isReversed=true;
+    console.log(str2);
+    let lastNumbers=str2.match(reg);
+    if(!lastNumbers){
+      isReversed=false
+      str2=calculExpression+str
+      lastNumbers=str2.match(reg2);
+
+      //On retourne juste l'expression de depart si aucune correpondance n'est trouvée
+      if(!lastNumbers)
+        return calculExpression;
+    }
+
+    // str="*"
+    
+
+    if (lastNumbers && lastNumbers[1]){
+        let tmp=lastNumbers[1]
+        if (isReversed)
+            tmp=reversedString(tmp)
+
+        let fTmp=parseFloat(tmp);
+
+      
+        if(isNaN(tmp)){
+            return calculExpression
+        }
+        console.log(definitiveStr);
+        definitiveStr=definitiveStr.replace(tmp, fTmp.toString());
+        return definitiveStr
+      
+    } 
 }
